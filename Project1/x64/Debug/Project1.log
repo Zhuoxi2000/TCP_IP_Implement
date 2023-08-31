@@ -1,0 +1,5 @@
+﻿  App.c
+  data_packet.c
+  正在生成代码...
+x64\Debug\data_packet.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+  Project1.vcxproj -> E:\tcp_imple\Project1\x64\Debug\Project1.exe
