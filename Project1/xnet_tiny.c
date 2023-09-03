@@ -9,7 +9,7 @@ static xnet_packet_t tx_packet, rx_packet;                      // ½ÓÊÕÓë·¢ËÍ»º³
  * @param data_size Êı¾İ¿Õ¼ä´óĞ¡
  * @return ·ÖÅäµÃµ½µÄ°ü½á¹¹
  */
-xnet_packet_t* xnet_alloc_for_send(uint16_t data_size) {
+xnet_packet_t* xnet_alloc_for_send(uint16_t data_size) {//·ÖÅäÖ»ĞèÒª µ±Ç°Êı¾İ´óĞ¡
     // ´Ótx_packetµÄºó¶ËÍùÇ°·ÖÅä£¬ÒòÎªÇ°±ßÒªÔ¤Áô×÷Îª¸÷ÖÖĞ­ÒéµÄÍ·²¿Êı¾İ´æ´¢¿Õ¼ä
     tx_packet.data = tx_packet.payload + XNET_CFG_PACKET_MAX_SIZE - data_size;
     tx_packet.size = data_size;
