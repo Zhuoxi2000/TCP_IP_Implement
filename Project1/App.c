@@ -1,15 +1,13 @@
-#include"data_packet.h"
+#include <stdio.h>
+#include "xnet_tiny.h"
 
+int main(void) {
+    xnet_init();
 
+    printf("xnet running\n");
+    while (1) {
+        xnet_poll();
+    }
 
-int main(void)
-{
-	packet_init();
-	while (1)
-	{
-		packet_poll();
-	}
-
-	return 0;
+    return 0;
 }
-

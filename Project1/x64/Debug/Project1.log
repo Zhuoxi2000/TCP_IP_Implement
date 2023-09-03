@@ -1,5 +1,9 @@
-﻿  App.c
-  data_packet.c
-  正在生成代码...
-x64\Debug\data_packet.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
-  Project1.vcxproj -> E:\tcp_imple\Project1\x64\Debug\Project1.exe
+﻿x64\Debug\xnet_tiny.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+x64\Debug\pcap_device.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+App.obj : error LNK2019: 无法解析的外部符号 xnet_init，函数 main 中引用了该符号
+App.obj : error LNK2019: 无法解析的外部符号 xnet_poll，函数 main 中引用了该符号
+port_pcap.obj : error LNK2019: 无法解析的外部符号 pcap_device_open，函数 xnet_driver_open 中引用了该符号
+port_pcap.obj : error LNK2019: 无法解析的外部符号 pcap_device_send，函数 xnet_driver_send 中引用了该符号
+port_pcap.obj : error LNK2019: 无法解析的外部符号 pcap_device_read，函数 xnet_driver_read 中引用了该符号
+port_pcap.obj : error LNK2019: 无法解析的外部符号 xnet_alloc_for_read，函数 xnet_driver_read 中引用了该符号
+E:\tcp_imple\Project1\x64\Debug\Project1.exe : fatal error LNK1120: 6 个无法解析的外部命令
