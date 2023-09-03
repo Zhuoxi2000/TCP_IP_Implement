@@ -1,4 +1,12 @@
-﻿x64\Debug\xnet_tiny.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+﻿  App.c
+  port_pcap.c
+  xnet_tiny.c
+  pcap_device.c
+  正在生成代码...
+  xnet_tiny.h
+  pcap_device.h
+  正在生成代码...
+x64\Debug\xnet_tiny.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
 x64\Debug\pcap_device.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
 App.obj : error LNK2019: 无法解析的外部符号 xnet_init，函数 main 中引用了该符号
 App.obj : error LNK2019: 无法解析的外部符号 xnet_poll，函数 main 中引用了该符号

@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\visual studio\VC\Tools\npcap-sdk-1.13\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\visual studio\VC\Tools\npcap-sdk-1.13\include;E:\lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
