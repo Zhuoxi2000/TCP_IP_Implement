@@ -2,8 +2,12 @@
 #include<string.h>
 #define min(a, b)               ((a) > (b) ? (b) : (a))
 
-static uint8_t netif_mac[XNET_MAC_ADDR_SIZE];
+
+static const xipaddr_t netif_ipaddr = XNET_CFG_NETIF_IP;            //虚拟网卡，协议栈都使用这个ip
+static const uint8_t ether_broadcast[] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+static uint8_t netif_mac[XNET_MAC_ADDR_SIZE];                   // mac地址
 static xnet_packet_t tx_packet, rx_packet;                      // 接收与发送缓冲区
+static xarp_entry_t arp_entry;                                  // 节省内存，只使用一个ARP表项
 
 
 #define swap_order16(v)   ((((v) & 0xFF) << 8) | (((v) >> 8) & 0xFF))
@@ -132,9 +136,39 @@ static void ethernet_poll(void) {
 
 
 /**
+ * ARP初始化
+ */
+void xarp_init(void) {
+    arp_entry.state = XARP_ENTRY_FREE;
+}
+void xarp_init(void);
+/**
+ * 产生一个ARP请求，请求网络指定ip地址的机器发回一个ARP响应
+ * @param ipaddr 请求的IP地址
+ * @return 请求结果
+ */
+int xarp_make_request(const xipaddr_t* ipaddr) {
+    xarp_packet_t* arp_packet;
+    xnet_packet_t* packet = xnet_alloc_for_send(sizeof(xarp_packet_t));
+
+    arp_packet = (xarp_packet_t*)packet->data;
+    arp_packet->hw_type = swap_order16(XARP_HW_ETHER);
+    arp_packet->pro_type = swap_order16(XNET_PROTOCOL_IP);
+    arp_packet->hw_len = XNET_MAC_ADDR_SIZE;
+    arp_packet->pro_len = XNET_IPV4_ADDR_SIZE;
+    arp_packet->opcode = swap_order16(XARP_REQUEST);
+    memcpy(arp_packet->sender_mac, netif_mac, XNET_MAC_ADDR_SIZE);
+    memcpy(arp_packet->sender_ip, netif_ipaddr.array, XNET_IPV4_ADDR_SIZE);
+    memset(arp_packet->target_mac, 0, XNET_MAC_ADDR_SIZE);
+    memcpy(arp_packet->target_ip, ipaddr->array, XNET_IPV4_ADDR_SIZE);
+    return ethernet_out_to(XNET_PROTOCOL_ARP, ether_broadcast, packet);
+}
+/**
  * 协议栈的初始化
  */
 void xnet_init(void) {
+    ethernet_init();
+    xarp_init();
 }
 
 /**
